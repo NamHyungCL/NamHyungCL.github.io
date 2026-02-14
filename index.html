@@ -3,58 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Test Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
+    <title>San Valentín</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #spotify-player {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            transition: all 1s ease;
+        }
+
+        #spotify-player.minimized {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            left: auto;
+            transform: translate(0, 0);
+            width: 300px;
+            height: 80px;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
+        }
+
+        .card img {
+            border-radius: 0.5rem;
+        }
+        
+        .heart {
+            position: fixed;
+            color: #ff79c6;
+            font-size: 20px;
+            animation: float-heart 4s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .star {
+            position: fixed;
+            color: #fff;
+            font-size: 10px;
+            animation: twinkle 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(139, 0, 139, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(139, 0, 139, 0.8), 0 0 30px rgba(139, 0, 139, 0.6); }
+        }
+        
+        #start-button {
+            animation: pulse 2s ease-in-out infinite, glow 2s ease-in-out infinite;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white relative overflow-hidden">
-    <div class="max-w-4xl mx-auto p-4">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-purple-400">Hola Nam</h1>
-            <p class="text-gray-300">Esto es un test profesional.</p>
-        </header>
-
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <div class="bg-purple-800 p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold mb-2">Tarjeta 1</h2>
-                <p>Contenido de la tarjeta 1.</p>
-            </div>
-            <div class="bg-purple-800 p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold mb-2">Tarjeta 2</h2>
-                <p>Contenido de la tarjeta 2.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="text-3xl font-bold text-purple-400 mb-4">Tabla de Datos</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                    <thead>
-                        <tr class="bg-purple-700 text-white">
-                            <th class="py-3 px-4 text-left">Columna 1</th>
-                            <th class="py-3 px-4 text-left">Columna 2</th>
-                            <th class="py-3 px-4 text-left">Columna 3</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-300">
-                        <tr class="hover:bg-purple-600">
-                            <td class="py-3 px-4">Dato 1</td>
-                            <td class="py-3 px-4">Dato 2</td>
-                            <td class="py-3 px-4">Dato 3</td>
-                        </tr>
-                        <tr class="hover:bg-purple-600">
-                            <td class="py-3 px-4">Dato 4</td>
-                            <td class="py-3 px-4">Dato 5</td>
-                            <td class="py-3 px-4">Dato 6</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+<body class="bg-black text-white">
+    <div id="overlay">
+        <div class="text-center">
+            <p class="text-xl mb-6" style="font-family: 'Poppins', sans-serif; font-weight: 300;">Haz clic para comenzar 🎵</p>
+            <button id="start-button" class="px-8 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition-all" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Comenzar</button>
+        </div>
     </div>
 
-    <div id="rain-container"></div>
+    <iframe id="spotify-player" class="rounded-lg" src="https://open.spotify.com/embed/track/2n2vIuYG7G8ATgjM4sY4VQ?utm_source=generator" width="400" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <h1 class="text-5xl mt-8" style="display: none;">Para Hebi, te quiero mucho 💖</h1>
+
+    <div class="card-container" style="display: none;">
+        <div class="card bg-black border-2 border-purple-700 rounded-lg p-4 text-center shadow-lg">
+            <img src="1.jpg" alt="Placeholder">
+            <p class="mt-4">Eres una persona increíble y llena de luz.</p>
+        </div>
+        <div class="card bg-black border-2 border-purple-700 rounded-lg p-4 text-center shadow-lg">
+            <img src="2.png" alt="Placeholder">
+            <p class="mt-4">Gracias por ser alguien tan especial en mi vida.</p>
+        </div>
+        <div class="card bg-black border-2 border-purple-700 rounded-lg p-4 text-center shadow-lg">
+            <img src="3.jfif" alt="Placeholder">
+            <p class="mt-4">Tu sonrisa ilumina los días más oscuros.</p>
+        </div>
+        <div class="card bg-black border-2 border-purple-700 rounded-lg p-4 text-center shadow-lg">
+            <img src="4.gif" alt="Placeholder">
+            <p class="mt-4">Para mí, Hebi es alguien muy importante.</p>
+        </div>
+    </div>
+
+    <footer class="mt-8 text-gray-400 text-sm" style="display: none;">
+        Hecho con mucho cariño 💖
+    </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('start-button').addEventListener('click', function() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+
+            const spotifyPlayer = document.getElementById('spotify-player');
+            spotifyPlayer.classList.add('minimized');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+
+                document.querySelector('h1').style.display = 'block';
+                document.querySelector('.card-container').style.display = 'flex';
+                document.querySelector('footer').style.display = 'block';
+                
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.card');
+                    let delay = 0;
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            const rect = card.getBoundingClientRect();
+                            if (rect.top < window.innerHeight - 100) {
+                                card.classList.add('visible');
+                            }
+                        }, delay);
+                        delay += 500;
+                    });
+                }, 300);
+            }, 1000);
+        });
+
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const cards = document.querySelectorAll('.card:not(.visible)');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        card.classList.add('visible');
+                    }
+                });
+            }, 50);
+        });
+    </script>
 </body>
 </html>
+
