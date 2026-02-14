@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Test Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white relative overflow-hidden">
+    <div class="max-w-4xl mx-auto p-4">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-purple-400">Hola Nam</h1>
+            <p class="text-gray-300">Esto es un test profesional.</p>
+        </header>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div class="bg-purple-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-2">Tarjeta 1</h2>
+                <p>Contenido de la tarjeta 1.</p>
+            </div>
+            <div class="bg-purple-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-2">Tarjeta 2</h2>
+                <p>Contenido de la tarjeta 2.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold text-purple-400 mb-4">Tabla de Datos</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <thead>
+                        <tr class="bg-purple-700 text-white">
+                            <th class="py-3 px-4 text-left">Columna 1</th>
+                            <th class="py-3 px-4 text-left">Columna 2</th>
+                            <th class="py-3 px-4 text-left">Columna 3</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="hover:bg-purple-600">
+                            <td class="py-3 px-4">Dato 1</td>
+                            <td class="py-3 px-4">Dato 2</td>
+                            <td class="py-3 px-4">Dato 3</td>
+                        </tr>
+                        <tr class="hover:bg-purple-600">
+                            <td class="py-3 px-4">Dato 4</td>
+                            <td class="py-3 px-4">Dato 5</td>
+                            <td class="py-3 px-4">Dato 6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <div id="rain-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
